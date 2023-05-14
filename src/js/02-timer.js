@@ -2,18 +2,6 @@ import flatpickr from "flatpickr";
 
 import "flatpickr/dist/flatpickr.min.css";
 
-// flatpickr(datetimePicker, {
-//   enableTime: true,
-//   dateFormat: "Y-m-d H:i",
-//   minDate: "today",
-//   defaultDate: "today",
-//   onChange: function(selectedDates) {
-//     selectedDate = selectedDates[0].getTime();
-//   }
-// });
-
-// 
-
 const datetimePicker = document.querySelector('#datetime-picker');
 const startButton = document.querySelector('[data-start]');
 const daysValue = document.querySelector('[data-days]');
@@ -21,8 +9,8 @@ const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
 const secondsValue = document.querySelector('[data-seconds]');
 
-let countInterval;
-let selectedDate;
+let countInterval = null;
+let selectedDate = null;
 
 
 // flatpickr
@@ -43,11 +31,11 @@ const options = {
   },
 };
 
-flatpickr('#datetime-picker', options);
+flatpickr(datetimePicker, options);
 
 // Таймер
 startButton.addEventListener('click', startTimer);
-
+// старт таймера
 function startTimer() {
   const timeNow = new Date().getTime();
   const remainingTime = selectedDate - timeNow;
@@ -56,8 +44,9 @@ function startTimer() {
     displayTime(0, 0, 0, 0);
     return;
   }
-
   startButton.disabled = true;
+  
+  // оновлення таймера
   countInterval = setInterval(updateTimer, 1000);
 
   updateTimer();
