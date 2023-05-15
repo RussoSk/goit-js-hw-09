@@ -9,6 +9,7 @@ const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
 const secondsValue = document.querySelector('[data-seconds]');
 
+
 let countInterval = null;
 let selectedDate = null;
 
@@ -39,7 +40,8 @@ startButton.addEventListener('click', startTimer);
 function startTimer() {
   const timeNow = new Date().getTime();
   const remainingTime = selectedDate - timeNow;
-
+  datetimePicker.disabled = true;
+  
   if (remainingTime <= 0) {
     displayTime(0, 0, 0, 0);
     return;
