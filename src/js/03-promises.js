@@ -13,7 +13,7 @@ function handleSubmit(event) {
   const step = parseInt(stepInput.value);
   const amount = parseInt(amountInput.value);
 
-  if (isNaN(delay) || isNaN(step) || isNaN(amount)) {
+  if (delay < 0 || step < 0 || amount <= 0) {
     alert('Please enter valid interval "numbers"');
     return;
   }
